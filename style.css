@@ -7,7 +7,7 @@
   --card: #ffffff;
   --muted: #6b7280;
   --text: #1f2937;
-  --accent: #3b82f6;   /* color de enfoque (suave) */
+  --accent: #3b82f6;
   --border: #e6e7ea;
   --btn-bg: #eef2f6;
   --btn-hover: #e1e8f9;
@@ -16,7 +16,11 @@
 }
 
 /* Reset */
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 html, body {
   height: 100%;
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
@@ -193,7 +197,7 @@ button.action.secondary {
   flex: 1;
 }
 
-/* Responsivo */
+/* Responsivo general */
 @media (max-width: 900px) {
   .contenedor {
     flex-direction: column;
@@ -208,6 +212,53 @@ button.action.secondary {
   }
   .informe button.action {
     width: 100%;
+  }
+}
+
+/* Mejora específica para móviles */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  h1, h3 {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  #cliente {
+    font-size: 16px;
+    padding: 14px;
+  }
+
+  .grid-productos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .grid-productos button {
+    width: 100%;
+    font-size: 16px;
+    height: 48px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .panel-derecho,
+  .informe {
+    padding: 14px;
+  }
+
+  .informe input[type="date"] {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .informe button.action {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px;
   }
 }
 
