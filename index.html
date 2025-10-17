@@ -13,7 +13,7 @@
   <h1>Facturación</h1>
 
   <input type="text" id="cliente" placeholder="Nombre del cliente">
-
+<section class="productos">
   <h3>Selecciona productos:</h3>
   <div class="grid-productos">
 <button onclick="agregarProducto('UVA X 50 G', 1080)">UVA X 50 G</button>
@@ -86,22 +86,21 @@
 <button onclick="agregarProducto('MANI ARANDANOS X 80 G', 2000)">MANI ARANDANOS X 80 G</button>
 <button onclick="agregarProducto('ARANDANO X 50 G', 2400)">ARANDANO X 50 G</button>
 <button onclick="agregarProducto('ARANDANO X 100 G', 4700)">ARANDANO X 100 G</button>
-<button onclick="agregarProducto('PISTACHO X 35 G', 3500)">PISTACHO X 35 G</button>
-<button onclick="agregarProducto('MIX FRUTOS SECOS X 50 G', 3500)">MIX FRUTOS SECOS X 50 G</button>
-<button onclick="agregarProducto('MIX FRUTOS SECOS X 100 G', 6900)">MIX FRUTOS SECOS X 100 G</button>
-<button onclick="agregarProducto('NUEZ X 50 G', 3500)">NUEZ X 50 G</button>
-<button onclick="agregarProducto('NUEZ X 100 G', 6900)">NUEZ X 100 G</button>
-<button onclick="agregarProducto('ALMENDRA X 50 G', 3500)">ALMENDRA X 50 G</button>
-<button onclick="agregarProducto('ALMENDRA X 100 G', 6900)">ALMENDRA X 100 G</button>
+<button onclick="agregarProducto('PISTACHO X 35 G', 3750)">PISTACHO X 35 G</button>
+<button onclick="agregarProducto('MIX FRUTOS SECOS X 50 G', 3750)">MIX FRUTOS SECOS X 50 G</button>
+<button onclick="agregarProducto('MIX FRUTOS SECOS X 100 G', 7400)">MIX FRUTOS SECOS X 100 G</button>
+<button onclick="agregarProducto('NUEZ X 50 G', 3750)">NUEZ X 50 G</button>
+<button onclick="agregarProducto('NUEZ X 100 G', 7400)">NUEZ X 100 G</button>
+<button onclick="agregarProducto('ALMENDRA X 50 G', 3750)">ALMENDRA X 50 G</button>
+<button onclick="agregarProducto('ALMENDRA X 100 G', 7400)">ALMENDRA X 100 G</button>
 <button onclick="agregarProducto('MORITAS X 50 G', 1750)">MORITAS X 50 G</button>
 <button onclick="agregarProducto('MORITAS X 100 G', 3400)">MORITAS X 100 G</button>
 <button onclick="agregarProducto('GOMAS X 50 G', 1750)">GOMAS X 50 G</button>
 <button onclick="agregarProducto('GOMAS X 100 G', 3400)">GOMAS X 100 G</button>
 <button onclick="agregarProducto('ALMENDRA CONF X 50 G', 2500)">ALMENDRA CONF X 50 G</button>
 <button onclick="agregarProducto('ALMENDRA CONF X 100 G', 4900)">ALMENDRA CONF X 100 G</button>
-<div class="grid-productos">
-
-
+</div>
+</section>
 
 
     <!-- 🔹 Panel derecho: seleccionados -->
@@ -109,7 +108,7 @@
       <div class="seleccionados">
         <h3>🧾 Productos seleccionados</h3>
         <ul id="listaSeleccion"></ul>
-
+        <div id="totalVenta">Total: $0</div>
         <button class="action" onclick="descargarPDF()">📄 Descargar PDF</button>
       </div>
     </aside>
@@ -126,4 +125,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-<!-- Cambio mínimo para forzar despliegue -->

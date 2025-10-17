@@ -1,4 +1,4 @@
-// Configuración de Firebase
+// ✅ Configuración de Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyBVbDDQhcPERi63IvrwVi8QifiDeRUSJkA",
   authDomain: "registro-productos-web.firebaseapp.com",
@@ -13,6 +13,7 @@ const db = firebase.firestore();
 
 let productosSeleccionados = [];
 
+// 🛒 Agregar producto
 function agregarProducto(nombre, precioUnitario) {
   const cantidad = prompt(`¿Cuántas unidades de ${nombre} deseas agregar?`);
   const cantidadNum = parseInt(cantidad);
@@ -32,17 +33,53 @@ function agregarProducto(nombre, precioUnitario) {
   actualizarListaVisual();
 }
 
-function actualizarListaVisual() {
-  const lista = document.getElementById("listaSeleccion");
-  lista.innerHTML = "";
-
-  productosSeleccionados.forEach((p) => {
-    const item = document.createElement("li");
-    item.textContent = `${p.nombre} - ${p.cantidad} x $${p.precioUnitario} = $${p.total}`;
-    lista.appendChild(item);
-  });
+// ✏️ Actualizar cantidad
+function actualizarCantidad(index, nuevaCantidad) {
+  const cantidadNum = parseInt(nuevaCantidad);
+  if (!isNaN(cantidadNum) && cantidadNum > 0) {
+    productosSeleccionados[index].cantidad = cantidadNum;
+    productosSeleccionados[index].total = cantidadNum * productosSeleccionados[index].precioUnitario;
+    actualizarListaVisual();
+  }
 }
 
+// ❌ Eliminar producto
+function eliminarProducto(index) {
+  productosSeleccionados.splice(index, 1);
+  actualizarListaVisual();
+}
+
+// 🧾 Actualizar lista visual y mostrar total
+function actualizarListaVisual() {
+  const lista = document.getElementById("listaSeleccion");
+  const totalVenta = document.getElementById("totalVenta");
+  lista.innerHTML = "";
+
+  let totalGeneral = 0;
+
+  productosSeleccionados.forEach((producto, index) => {
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+      <div><strong>${producto.nombre}</strong></div>
+      <div>
+        <label>Cantidad:</label>
+        <input type="number" min="1" value="${producto.cantidad}" 
+          onchange="actualizarCantidad(${index}, this.value)">
+      </div>
+     <div>Subtotal: $${producto.total.toLocaleString('es-CO')}</div>
+      <button onclick="eliminarProducto(${index})">Eliminar</button>
+    `;
+
+    lista.appendChild(li);
+    totalGeneral += producto.total;
+  });
+
+  // Mostrar el total actualizado
+ totalVenta.textContent = `💰 Total: $${totalGeneral.toLocaleString('es-CO')}`;
+}
+
+// 💾 Descargar factura PDF y guardar en Firebase
 function descargarPDF() {
   const cliente = document.getElementById("cliente").value.trim();
 
@@ -79,8 +116,10 @@ function descargarPDF() {
 
 function formatPrice(valor) {
   return valor.toLocaleString("es-CO");
+  
 }
 
+// 🧾 Generar PDF tipo ticket
 function generarPDF(cliente, productos, totalFactura) {
   const { jsPDF } = window.jspdf;
 
@@ -115,19 +154,14 @@ function generarPDF(cliente, productos, totalFactura) {
   // Detalle de productos
   y += 6;
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(7); // 👈 más pequeña la letra
+  doc.setFontSize(7);
 
   productos.forEach((p) => {
-    // Limitar el nombre y dejar más espacio
-    let nombreCorto = p.nombre;
-    if (nombreCorto.length > 26) {
-      nombreCorto = nombreCorto.substring(0, 26) + "...";
-    }
+    let nombreCorto = p.nombre.length > 26 ? p.nombre.substring(0, 26) + "..." : p.nombre;
 
-    // Imprimir con más espacio para el nombre y cantidad centrada
     doc.text(nombreCorto, 2, y);
     doc.text(`$${formatPrice(p.precioUnitario)}`, 42, y);
-    doc.text(`${p.cantidad}`, 61, y, { align: "center" }); // 👈 cantidad centrada
+    doc.text(`${p.cantidad}`, 61, y, { align: "center" });
     doc.text(`$${formatPrice(p.total)}`, 69, y);
 
     y += 6;
@@ -147,6 +181,7 @@ function generarPDF(cliente, productos, totalFactura) {
   doc.save(nombreArchivo);
 }
 
+// 📊 Exportar informe diario a Excel
 function exportarInformeExcelPorDia() {
   const fechaInput = document.getElementById("fechaInforme").value;
 
