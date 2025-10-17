@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Facturación</title>
+  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore-compat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Facturación</h1>
+
+  <input type="text" id="cliente" placeholder="Nombre del cliente">
+
+  <h3>Selecciona productos:</h3>
+  <div class="grid-productos">
+<button onclick="agregarProducto('UVA X 50 G', 1080)">UVA X 50 G</button>
+<button onclick="agregarProducto('UVA X 100 G', 2000)">UVA X 100 G</button>
+<button onclick="agregarProducto('UVA X 200 G', 3750)">UVA X 200 G</button>
+<button onclick="agregarProducto('UVA X 500 G', 9000)">UVA X 500 G</button>
+<button onclick="agregarProducto('COCO X 50 G', 2000)">COCO X 50 G</button>
+<button onclick="agregarProducto('COCO X 100 G', 3750)">COCO X 100 G</button>
+<button onclick="agregarProducto('COCO X 250 G', 9000)">COCO X 250 G</button>
+<button onclick="agregarProducto('UVA + COCO X 75 G', 2000)">UVA + COCO X 75 G</button>
+<button onclick="agregarProducto('UVA + COCO X 150 G', 3750)">UVA + COCO X 150 G</button>
+<button onclick="agregarProducto('CIRUELA X 50 G', 2150)">CIRUELA X 50 G</button>
+<button onclick="agregarProducto('CIRUELA X 100 G', 4150)">CIRUELA X 100 G</button>
+<button onclick="agregarProducto('CIRUELA X 200 G', 8000)">CIRUELA X 200 G</button>
+<button onclick="agregarProducto('CANELA X 10 G', 2000)">CANELA X 10 G</button>
+<button onclick="agregarProducto('CANELA X 20 G', 3750)">CANELA X 20 G</button>
+<button onclick="agregarProducto('CANELA X 30 G', 4900)">CANELA X 30 G</button>
+<button onclick="agregarProducto('CANELA X 50 G', 8250)">CANELA X 50 G</button>
+<button onclick="agregarProducto('CANELA PARTIDA X 10 G', 1650)">CANELA PARTIDA X 10 G</button>
+<button onclick="agregarProducto('CANELA PARTIDA X 20 G', 2400)">CANELA PARTIDA X 20 G</button>
+<button onclick="agregarProducto('CANELA PARTIDA X 100 G', 14000)">CANELA PARTIDA X 100 G</button>
+<button onclick="agregarProducto('CANELA MOLIDA X 20 G', 2500)">CANELA MOLIDA X 20 G</button>
+<button onclick="agregarProducto('CANELA MOLIDA X 50 G', 5000)">CANELA MOLIDA X 50 G</button>
+<button onclick="agregarProducto('CLAVO X 10 G', 1250)">CLAVO X 10 G</button>
+<button onclick="agregarProducto('CLAVO X 20 G', 2400)">CLAVO X 20 G</button>
+<button onclick="agregarProducto('ANIS ESTRELLA X 10 G', 1500)">ANIS ESTRELLA X 10 G</button>
+<button onclick="agregarProducto('ANIS ESTRELLA X 20 G', 2900)">ANIS ESTRELLA X 20 G</button>
+<button onclick="agregarProducto('ANIS EN PEPA X 10 G', 830)">ANIS EN PEPA X 10 G</button>
+<button onclick="agregarProducto('ANIS EN PEPA X 20 G', 1580)">ANIS EN PEPA X 20 G</button>
+<button onclick="agregarProducto('FLOR DE JAMAICA X 18 G', 2150)">FLOR DE JAMAICA X 18 G</button>
+<button onclick="agregarProducto('FLOR DE MANZANILLA X 18 G', 2150)">FLOR DE MANZANILLA X 18 G</button>
+<button onclick="agregarProducto('FLOR DE CALENDULA X 18 G', 2150)">FLOR DE CALENDULA X 18 G</button>
+<button onclick="agregarProducto('LINAZA X 100 G', 1500)">LINAZA X 100 G</button>
+<button onclick="agregarProducto('LINAZA X 200 G', 2900)">LINAZA X 200 G</button>
+<button onclick="agregarProducto('LINAZA X 500 G', 6900)">LINAZA X 500 G</button>
+<button onclick="agregarProducto('LINAZA MOLIDA X 200 G', 2900)">LINAZA MOLIDA X 200 G</button>
+<button onclick="agregarProducto('LINAZA MOLIDA X 500 G', 6900)">LINAZA MOLIDA X 500 G</button>
+<button onclick="agregarProducto('BICARBONATO X 50 G', 580)">BICARBONATO X 50 G</button>
+<button onclick="agregarProducto('BICARBONATO X 100 G', 1000)">BICARBONATO X 100 G</button>
+<button onclick="agregarProducto('BICARBONATO X 200 G', 1900)">BICARBONATO X 200 G</button>
+<button onclick="agregarProducto('BICARBONATO X 500 G', 4000)">BICARBONATO X 500 G</button>
+<button onclick="agregarProducto('NUEZ MOSCADA X 15 G', 2000)">NUEZ MOSCADA X 15 G</button>
+<button onclick="agregarProducto('NUEZ MOSCADA X 30 G', 3900)">NUEZ MOSCADA X 30 G</button>
+<button onclick="agregarProducto('CHIA X 200 G', 6650)">CHIA X 200 G</button>
+<button onclick="agregarProducto('AJONJOLI X 100 G', 3300)">AJONJOLI X 100 G</button>
+<button onclick="agregarProducto('GRAGEAS X 100 G', 2500)">GRAGEAS X 100 G</button>
+<button onclick="agregarProducto('HABA X 30 G', 1080)">HABA X 30 G</button>
+<button onclick="agregarProducto('HABA X 60 G', 2000)">HABA X 60 G</button>
+<button onclick="agregarProducto('HABA X 120 G', 3750)">HABA X 120 G</button>
+<button onclick="agregarProducto('MANI UVA X 40 G', 1080)">MANI UVA X 40 G</button>
+<button onclick="agregarProducto('MANI UVA X 80 G', 2000)">MANI UVA X 80 G</button>
+<button onclick="agregarProducto('MANI UVA X 200 G', 3750)">MANI UVA X 200 G</button>
+<button onclick="agregarProducto('MANI SAL X 40 G', 1080)">MANI SAL X 40 G</button>
+<button onclick="agregarProducto('MANI SAL X 80 G', 2000)">MANI SAL X 80 G</button>
+<button onclick="agregarProducto('MANI SAL X 200 G', 3750)">MANI SAL X 200 G</button>
+<button onclick="agregarProducto('MANI DULCE X 40 G', 1080)">MANI DULCE X 40 G</button>
+<button onclick="agregarProducto('MANI DULCE X 80 G', 2000)">MANI DULCE X 80 G</button>
+<button onclick="agregarProducto('MANI DULCE X 200 G', 3750)">MANI DULCE X 200 G</button>
+<button onclick="agregarProducto('MANI AJONJOLI X 40 G', 1080)">MANI AJONJOLI X 40 G</button>
+<button onclick="agregarProducto('MANI AJONJOLI X 80 G', 2000)">MANI AJONJOLI X 80 G</button>
+<button onclick="agregarProducto('MANI AJONJOLI X 200 G', 3750)">MANI AJONJOLI X 200 G</button>
+<button onclick="agregarProducto('MANI MIXTO X 40 G', 1080)">MANI MIXTO X 40 G</button>
+<button onclick="agregarProducto('MANI MIXTO X 80 G', 2000)">MANI MIXTO X 80 G</button>
+<button onclick="agregarProducto('MANI MIXTO X 200 G', 3750)">MANI MIXTO X 200 G</button>
+<button onclick="agregarProducto('MANI NATURAL X 40 G', 1080)">MANI NATURAL X 40 G</button>
+<button onclick="agregarProducto('MANI NATURAL X 80 G', 2000)">MANI NATURAL X 80 G</button>
+<button onclick="agregarProducto('MANI PICANTE X 40 G', 1080)">MANI PICANTE X 40 G</button>
+<button onclick="agregarProducto('MANI PICANTE X 80 G', 2000)">MANI PICANTE X 80 G</button>
+<button onclick="agregarProducto('MANI ARANDANOS X 40 G', 1080)">MANI ARANDANOS X 40 G</button>
+<button onclick="agregarProducto('MANI ARANDANOS X 80 G', 2000)">MANI ARANDANOS X 80 G</button>
+<button onclick="agregarProducto('ARANDANO X 50 G', 2400)">ARANDANO X 50 G</button>
+<button onclick="agregarProducto('ARANDANO X 100 G', 4700)">ARANDANO X 100 G</button>
+<button onclick="agregarProducto('PISTACHO X 35 G', 3500)">PISTACHO X 35 G</button>
+<button onclick="agregarProducto('MIX FRUTOS SECOS X 50 G', 3500)">MIX FRUTOS SECOS X 50 G</button>
+<button onclick="agregarProducto('MIX FRUTOS SECOS X 100 G', 6900)">MIX FRUTOS SECOS X 100 G</button>
+<button onclick="agregarProducto('NUEZ X 50 G', 3500)">NUEZ X 50 G</button>
+<button onclick="agregarProducto('NUEZ X 100 G', 6900)">NUEZ X 100 G</button>
+<button onclick="agregarProducto('ALMENDRA X 50 G', 3500)">ALMENDRA X 50 G</button>
+<button onclick="agregarProducto('ALMENDRA X 100 G', 6900)">ALMENDRA X 100 G</button>
+<button onclick="agregarProducto('MORITAS X 50 G', 1750)">MORITAS X 50 G</button>
+<button onclick="agregarProducto('MORITAS X 100 G', 3400)">MORITAS X 100 G</button>
+<button onclick="agregarProducto('GOMAS X 50 G', 1750)">GOMAS X 50 G</button>
+<button onclick="agregarProducto('GOMAS X 100 G', 3400)">GOMAS X 100 G</button>
+<button onclick="agregarProducto('ALMENDRA CONF X 50 G', 2500)">ALMENDRA CONF X 50 G</button>
+<button onclick="agregarProducto('ALMENDRA CONF X 100 G', 4900)">ALMENDRA CONF X 100 G</button>
+<div class="grid-productos">
+
+
+
+
+    <!-- 🔹 Panel derecho: seleccionados -->
+    <aside class="panel-derecho">
+      <div class="seleccionados">
+        <h3>🧾 Productos seleccionados</h3>
+        <ul id="listaSeleccion"></ul>
+
+        <button class="action" onclick="descargarPDF()">📄 Descargar PDF</button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- 🔹 Informe -->
+  <section class="informe">
+    <h3>Informe de Ventas</h3>
+    <input type="date" id="fechaInforme">
+    <button class="action secondary" onclick="exportarInformeExcelPorDia()">📊 Informe</button>
+  </section>
+
+  <!-- ⚙️ Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
