@@ -140,32 +140,32 @@ function generarPDF(cliente, productos, totalFactura) {
   doc.setFont("helvetica", "normal");
   doc.text(`Cliente: ${cliente}`, 2, 18);
   doc.text(`Fecha: ${fecha}`, 2, 24);
+// Encabezado de tabla
+let y = 32;
+doc.setFont("helvetica", "bold");
+doc.text("Producto", 2, y);
+doc.text("Cant", 42, y);   // Posición ajustada
+doc.text("Precio", 54, y); // Posición ajustada
+doc.text("Valor", 69, y);
+doc.setDrawColor(180);
+doc.line(1, y + 2, 78, y + 2);
 
-  // Encabezado de tabla
-  let y = 32;
-  doc.setFont("helvetica", "bold");
-  doc.text("Producto", 2, y);
-  doc.text("Precio", 40, y);
-  doc.text("Cant", 57, y);
-  doc.text("Valor", 68, y);
-  doc.setDrawColor(180);
-  doc.line(1, y + 2, 78, y + 2);
+// Detalle de productos
+y += 6;
+doc.setFont("helvetica", "normal");
+doc.setFontSize(7);
 
-  // Detalle de productos
+productos.forEach((p) => {
+  let nombreCorto = p.nombre.length > 26 ? p.nombre.substring(0, 26) + "..." : p.nombre;
+
+  doc.text(nombreCorto, 2, y);
+  doc.text(`${p.cantidad}`, 45, y); // Cantidad primero
+  doc.text(`$${formatPrice(p.precioUnitario)}`, 55, y); // Precio después
+  doc.text(`$${formatPrice(p.total)}`, 69, y);
+
   y += 6;
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(7);
+});
 
-  productos.forEach((p) => {
-    let nombreCorto = p.nombre.length > 26 ? p.nombre.substring(0, 26) + "..." : p.nombre;
-
-    doc.text(nombreCorto, 2, y);
-    doc.text(`$${formatPrice(p.precioUnitario)}`, 42, y);
-    doc.text(`${p.cantidad}`, 61, y, { align: "center" });
-    doc.text(`$${formatPrice(p.total)}`, 69, y);
-
-    y += 6;
-  });
 
   // Total
   doc.setFont("helvetica", "bold");
