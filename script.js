@@ -67,7 +67,7 @@ function actualizarListaVisual() {
         <input type="number" min="1" value="${producto.cantidad}" 
           onchange="actualizarCantidad(${index}, this.value)">
       </div>
-     <div>Subtotal: $${producto.total.toLocaleString('es-CO')}</div>
+      <div>Subtotal: $${producto.total.toLocaleString('es-CO')}</div>
       <button onclick="eliminarProducto(${index})">Eliminar</button>
     `;
 
@@ -75,8 +75,7 @@ function actualizarListaVisual() {
     totalGeneral += producto.total;
   });
 
-  // Mostrar el total actualizado
- totalVenta.textContent = `💰 Total: $${totalGeneral.toLocaleString('es-CO')}`;
+  totalVenta.textContent = `💰 Total: $${totalGeneral.toLocaleString('es-CO')}`;
 }
 
 // 💾 Descargar factura PDF y guardar en Firebase
@@ -105,6 +104,7 @@ function descargarPDF() {
     })
     .then(() => {
       generarPDF(cliente, productosSeleccionados, totalFactura);
+      guardarResumenDiario(fechaHoy); // ✅ Guardar resumen automático
       productosSeleccionados = [];
       actualizarListaVisual();
     })
@@ -114,9 +114,39 @@ function descargarPDF() {
     });
 }
 
+// ✅ Guardar resumen diario
+function guardarResumenDiario(fecha) {
+  db.collection("facturas")
+    .where("fecha", "==", fecha)
+    .get()
+    .then((querySnapshot) => {
+      const resumen = {
+        productos: {},
+        totalVentas: 0,
+        cantidadFacturas: querySnapshot.size
+      };
+
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        data.productos.forEach((p) => {
+          if (!resumen.productos[p.nombre]) {
+            resumen.productos[p.nombre] = { cantidad: 0, total: 0 };
+          }
+          resumen.productos[p.nombre].cantidad += p.cantidad;
+          resumen.productos[p.nombre].total += p.total;
+          resumen.totalVentas += p.total;
+        });
+      });
+
+      db.collection("resumen_diario").doc(fecha).set(resumen);
+    })
+    .catch((error) => {
+      console.error("Error al guardar resumen diario:", error);
+    });
+}
+
 function formatPrice(valor) {
   return valor.toLocaleString("es-CO");
-  
 }
 
 // 🧾 Generar PDF tipo ticket
@@ -132,7 +162,6 @@ function generarPDF(cliente, productos, totalFactura) {
 
   const fecha = new Date().toLocaleString("es-CO");
 
-  // Encabezado
   doc.setFont("helvetica", "bold");
   doc.setFontSize(10);
   doc.text("TICKET", 2, 10);
@@ -140,49 +169,44 @@ function generarPDF(cliente, productos, totalFactura) {
   doc.setFont("helvetica", "normal");
   doc.text(`Cliente: ${cliente}`, 2, 18);
   doc.text(`Fecha: ${fecha}`, 2, 24);
-// Encabezado de tabla
-let y = 32;
-doc.setFont("helvetica", "bold");
-doc.text("Producto", 2, y);
-doc.text("Cant", 42, y);   // Posición ajustada
-doc.text("Precio", 54, y); // Posición ajustada
-doc.text("Valor", 69, y);
-doc.setDrawColor(180);
-doc.line(1, y + 2, 78, y + 2);
 
-// Detalle de productos
-y += 6;
-doc.setFont("helvetica", "normal");
-doc.setFontSize(7);
-
-productos.forEach((p) => {
-  let nombreCorto = p.nombre.length > 26 ? p.nombre.substring(0, 26) + "..." : p.nombre;
-
-  doc.text(nombreCorto, 2, y);
-  doc.text(`${p.cantidad}`, 45, y); // Cantidad primero
-  doc.text(`$${formatPrice(p.precioUnitario)}`, 55, y); // Precio después
-  doc.text(`$${formatPrice(p.total)}`, 69, y);
+  let y = 32;
+  doc.setFont("helvetica", "bold");
+  doc.text("Producto", 2, y);
+  doc.text("Cant", 42, y);
+  doc.text("Precio", 54, y);
+  doc.text("Valor", 69, y);
+  doc.setDrawColor(180);
+  doc.line(1, y + 2, 78, y + 2);
 
   y += 6;
-});
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(7);
 
+  productos.forEach((p) => {
+    let nombreCorto = p.nombre.length > 26 ? p.nombre.substring(0, 26) + "..." : p.nombre;
 
-  // Total
+    doc.text(nombreCorto, 2, y);
+    doc.text(`${p.cantidad}`, 45, y);
+    doc.text(`$${formatPrice(p.precioUnitario)}`, 55, y);
+    doc.text(`$${formatPrice(p.total)}`, 69, y);
+
+    y += 6;
+  });
+
   doc.setFont("helvetica", "bold");
   doc.setFontSize(10);
   doc.text(`Total a Pagar: $${formatPrice(totalFactura)}`, 2, y + 6);
 
-  // Mensaje final
   doc.setFont("helvetica", "normal");
   doc.text("Gracias por su compra", 2, y + 12);
 
-  // Guardar PDF
   const nombreArchivo = `ticket_factura_${fecha.replace(/[/: ]/g, "_")}.pdf`;
   doc.save(nombreArchivo);
 }
 
-// 📊 Exportar informe diario a Excel
-function exportarInformeExcelPorDia() {
+
+function exportarResumenDiarioExcel() {
   const fechaInput = document.getElementById("fechaInforme").value;
 
   if (!fechaInput) {
@@ -190,48 +214,37 @@ function exportarInformeExcelPorDia() {
     return;
   }
 
-  db.collection("facturas")
-    .where("fecha", "==", fechaInput)
-    .get()
-    .then((querySnapshot) => {
-      const resumen = {};
-
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        const productos = Array.isArray(data.productos) ? data.productos : [data];
-
-        productos.forEach((p) => {
-          if (!resumen[p.nombre]) {
-            resumen[p.nombre] = { cantidad: 0, total: 0 };
-          }
-          resumen[p.nombre].cantidad += p.cantidad;
-          resumen[p.nombre].total += p.total;
-        });
-      });
-
-      if (Object.keys(resumen).length === 0) {
-        alert("No hay ventas registradas para esa fecha.");
+  db.collection("resumen_diario").doc(fechaInput).get()
+    .then((doc) => {
+      if (!doc.exists) {
+        alert("No hay resumen guardado para esa fecha.");
         return;
       }
 
+      const data = doc.data();
       const datosExcel = [["Producto", "Cantidad total", "Ventas totales"]];
-      for (const producto in resumen) {
+
+      for (const producto in data.productos) {
         datosExcel.push([
           producto,
-          resumen[producto].cantidad,
-          resumen[producto].total
+          data.productos[producto].cantidad,
+          data.productos[producto].total
         ]);
       }
 
+      datosExcel.push(["", "", ""]);
+      datosExcel.push(["Total Ventas", "", data.totalVentas]);
+      datosExcel.push(["Cantidad de Facturas", "", data.cantidadFacturas]);
+
       const hoja = XLSX.utils.aoa_to_sheet(datosExcel);
       const libro = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(libro, hoja, "InformeVentas");
+      XLSX.utils.book_append_sheet(libro, hoja, "ResumenDiario");
 
       const fechaTexto = fechaInput.replace(/-/g, "_");
-      XLSX.writeFile(libro, `informe_ventas_${fechaTexto}.xlsx`);
+      XLSX.writeFile(libro, `resumen_diario_${fechaTexto}.xlsx`);
     })
     .catch((error) => {
-      console.error("Error al generar informe:", error);
+      console.error("Error al generar resumen:", error);
       alert("❌ No se pudo generar el archivo Excel");
     });
 }

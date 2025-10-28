@@ -14,7 +14,6 @@
 
   <input type="text" id="cliente" placeholder="Nombre del cliente">
 <section class="productos">
-  <h3>Selecciona productos:</h3>
   <div class="grid-productos">
 <button onclick="agregarProducto('UVA X 50 G', 1080)">UVA X 50 G</button>
 <button onclick="agregarProducto('UVA X 100 G', 2000)">UVA X 100 G</button>
@@ -66,9 +65,9 @@
 <button onclick="agregarProducto('MANI UVA X 40 G', 1080)">MANI UVA X 40 G</button>
 <button onclick="agregarProducto('MANI UVA X 80 G', 2000)">MANI UVA X 80 G</button>
 <button onclick="agregarProducto('MANI UVA X 200 G', 3750)">MANI UVA X 200 G</button>
-<button onclick="agregarProducto('MANI SAL X 40 G', 1080)">MANI SAL X 40 G</button>
-<button onclick="agregarProducto('MANI SAL X 80 G', 2000)">MANI SAL X 80 G</button>
-<button onclick="agregarProducto('MANI SAL X 200 G', 3750)">MANI SAL X 200 G</button>
+<button onclick="agregarProducto('MANI SALADO X 40 G', 1080)">MANI SALADO X 40 G</button>
+<button onclick="agregarProducto('MANI SALADO X 80 G', 2000)">MANI SALADO X 80 G</button>
+<button onclick="agregarProducto('MANI SALADO X 200 G', 3750)">MANI SALADO X 200 G</button>
 <button onclick="agregarProducto('MANI DULCE X 40 G', 1080)">MANI DULCE X 40 G</button>
 <button onclick="agregarProducto('MANI DULCE X 80 G', 2000)">MANI DULCE X 80 G</button>
 <button onclick="agregarProducto('MANI DULCE X 200 G', 3750)">MANI DULCE X 200 G</button>
@@ -114,12 +113,11 @@
     </aside>
   </main>
 
-  <!-- 🔹 Informe -->
-  <section class="informe">
-    <h3>Informe de Ventas</h3>
-    <input type="date" id="fechaInforme">
-    <button class="action secondary" onclick="exportarInformeExcelPorDia()">📊 Informe</button>
-  </section>
+<section class="informe">
+  <h3>Informe de Ventas</h3>
+  <input type="date" id="fechaInforme">
+  <button class="action secondary" onclick="exportarResumenDiarioExcel()">📥 Resumen Diario</button>
+</section>
 
   <!-- ⚙️ Scripts -->
   <script src="script.js"></script>
