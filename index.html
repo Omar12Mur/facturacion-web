@@ -13,7 +13,10 @@
   <h1>Facturación</h1>
 
   <input type="text" id="cliente" placeholder="Nombre del cliente">
+<button id="cambiarPrecios">Cambiar lista de precios</button>
+
 <section class="productos">
+<<<<<<< HEAD
   <div class="grid-productos">
 <button onclick="agregarProducto('UVA X 50 G', 1150)">UVA X 50 G</button>
 <button onclick="agregarProducto('UVA X 100 G', 2150)">UVA X 100 G</button>
@@ -98,6 +101,93 @@
 <button onclick="agregarProducto('GOMAS X 100 G', 3400)">GOMAS X 100 G</button>
 <button onclick="agregarProducto('ALMENDRA CONF X 50 G', 2500)">ALMENDRA CONF X 50 G</button>
 <button onclick="agregarProducto('ALMENDRA CONF X 100 G', 4900)">ALMENDRA CONF X 100 G</button>
+=======
+<div class="grid-productos">
+<button class="producto"data-nombre="UVA X 50 G"data-precio1="1150"data-precio2="1250"onclick="agregarProducto(this)">UVA X 50 G</button>
+<button class="producto"data-nombre="UVA X 100 G"data-precio1="2150"data-precio2="2250"onclick="agregarProducto(this)">UVA X 100 G</button>
+<button class="producto"data-nombre="UVA X 200 G"data-precio1="4150"data-precio2="4250"onclick="agregarProducto(this)">UVA X 200 G</button>
+<button class="producto"data-nombre="UVA X 500 G"data-precio1="10000"data-precio2="10000"onclick="agregarProducto(this)">UVA X 500 G</button>
+<button class="producto"data-nombre="COCO X 50 G"data-precio1="2150"data-precio2="2250"onclick="agregarProducto(this)">COCO X 50 G</button>
+<button class="producto" data-nombre="COCO X 100 G" data-precio1="4150"data-precio2="4250" onclick="agregarProducto(this)">COCO X 100 G</button>
+<button class="producto" data-nombre="COCO X 250 G" data-precio1="10000" data-precio2="10000"onclick="agregarProducto(this)">COCO X 250 G</button>
+<button class="producto" data-nombre="UVA + COCO X 75 G" data-precio1="2150"data-precio2="2250" onclick="agregarProducto(this)">UVA + COCO X 75 G</button>
+<button class="producto" data-nombre="UVA + COCO X 150 G" data-precio1="4150"data-precio2="4250" onclick="agregarProducto(this)">UVA + COCO X 150 G</button>
+<button class="producto" data-nombre="CIRUELA X 50 G" data-precio1="2150"data-precio2="2250" onclick="agregarProducto(this)">CIRUELA X 50 G</button>
+<button class="producto" data-nombre="CIRUELA X 100 G" data-precio1="4150"data-precio2="4250" onclick="agregarProducto(this)">CIRUELA X 100 G</button>
+<button class="producto" data-nombre="CIRUELA X 200 G" data-precio1="8000"data-precio2="8150" onclick="agregarProducto(this)">CIRUELA X 200 G</button>
+<button class="producto" data-nombre="CANELA X 10 G" data-precio1="2000"data-precio2="2150" onclick="agregarProducto(this)">CANELA X 10 G</button>
+<button class="producto" data-nombre="CANELA X 20 G" data-precio1="3750"data-precio2="3830" onclick="agregarProducto(this)">CANELA X 20 G</button>
+<button class="producto" data-nombre="CANELA X 30 G" data-precio1="5400"data-precio2="5500" onclick="agregarProducto(this)">CANELA X 30 G</button>
+<button class="producto" data-nombre="CANELA X 50 G" data-precio1="9000"data-precio2="9150" onclick="agregarProducto(this)">CANELA X 50 G</button>
+<button class="producto" data-nombre="CANELA PARTIDA X 10 G" data-precio1="1650"data-precio2="1750" onclick="agregarProducto(this)">CANELA PARTIDA X 10 G</button>
+<button class="producto" data-nombre="CANELA PARTIDA X 20 G" data-precio1="2400"data-precio2="2500" onclick="agregarProducto(this)">CANELA PARTIDA X 20 G</button>
+<button class="producto" data-nombre="CANELA PARTIDA X 100 G" data-precio1="14000"data-precio2="14500" onclick="agregarProducto(this)">CANELA PARTIDA X 100 G</button>
+<button class="producto" data-nombre="CANELA MOLIDA X 20 G" data-precio1="2500"data-precio2="2650" onclick="agregarProducto(this)">CANELA MOLIDA X 20 G</button>
+<button class="producto" data-nombre="CANELA MOLIDA X 50 G" data-precio1="5000" data-precio2="5150"onclick="agregarProducto(this)">CANELA MOLIDA X 50 G</button>
+<button class="producto" data-nombre="CLAVO X 10 G" data-precio1="1500"data-precio2="1650" onclick="agregarProducto(this)">CLAVO X 10 G</button>
+<button class="producto" data-nombre="CLAVO X 20 G" data-precio1="2900" data-precio2="3000"onclick="agregarProducto(this)">CLAVO X 20 G</button>
+<button class="producto" data-nombre="ANIS ESTRELLA X 10 G" data-precio1="1500"data-precio2="1650" data-precio="2250"onclick="agregarProducto(this)">ANIS ESTRELLA X 10 G</button>
+<button class="producto" data-nombre="ANIS ESTRELLA X 20 G" data-precio1="2900" data-precio2="3000"onclick="agregarProducto(this)">ANIS ESTRELLA X 20 G</button>
+<button class="producto" data-nombre="ANIS EN PEPA X 10 G" data-precio1="830"data-precio2="900" onclick="agregarProducto(this)">ANIS EN PEPA X 10 G</button>
+<button class="producto" data-nombre="ANIS EN PEPA X 20 G" data-precio1="1580" data-precio2="1750"onclick="agregarProducto(this)">ANIS EN PEPA X 20 G</button>
+<button class="producto" data-nombre="FLOR DE JAMAICA X 18 G" data-precio1="2150"data-precio2="2250" onclick="agregarProducto(this)">FLOR DE JAMAICA X 18 G</button>
+<button class="producto" data-nombre="FLOR DE MANZANILLA X 18 G" data-precio1="2150" data-precio2="2250"onclick="agregarProducto(this)">FLOR DE MANZANILLA X 18 G</button>
+<button class="producto" data-nombre="FLOR DE CALENDULA X 18 G" data-precio1="2150" data-precio2="2250"onclick="agregarProducto(this)">FLOR DE CALENDULA X 18 G</button>
+<button class="producto" data-nombre="LINAZA X 100 G" data-precio1="1650"data-precio2="1750" onclick="agregarProducto(this)">LINAZA X 100 G</button>
+<button class="producto" data-nombre="LINAZA X 200 G" data-precio1="3000" data-precio2="3150"onclick="agregarProducto(this)">LINAZA X 200 G</button>
+<button class="producto" data-nombre="LINAZA X 500 G" data-precio1="7000" data-precio2="7150"onclick="agregarProducto(this)">LINAZA X 500 G</button>
+<button class="producto" data-nombre="LINAZA MOLIDA X 200 G" data-precio1="2900" data-precio2="3000"onclick="agregarProducto(this)">LINAZA MOLIDA X 200 G</button>
+<button class="producto" data-nombre="LINAZA MOLIDA X 500 G" data-precio1="6900"data-precio2="7000" onclick="agregarProducto(this)">LINAZA MOLIDA X 500 G</button>
+<button class="producto" data-nombre="BICARBONATO X 50 G" data-precio1="580"data-precio2="650" onclick="agregarProducto(this)">BICARBONATO X 50 G</button>
+<button class="producto" data-nombre="BICARBONATO X 100 G" data-precio1="1000"data-precio2="1150" onclick="agregarProducto(this)">BICARBONATO X 100 G</button>
+<button class="producto" data-nombre="BICARBONATO X 200 G" data-precio1="1900" data-precio2="2250"onclick="agregarProducto(this)">BICARBONATO X 200 G</button>
+<button class="producto" data-nombre="BICARBONATO X 500 G" data-precio1="4000" data-precio2="4150"onclick="agregarProducto(this)">BICARBONATO X 500 G</button>
+<button class="producto" data-nombre="NUEZ MOSCADA X 15 G" data-precio1="2000" data-precio2="2150"onclick="agregarProducto(this)">NUEZ MOSCADA X 15 G</button>
+<button class="producto" data-nombre="NUEZ MOSCADA X 30 G" data-precio1="3900"data-precio2="4250" onclick="agregarProducto(this)">NUEZ MOSCADA X 30 G</button>
+<button class="producto" data-nombre="CHIA X 200 G" data-precio1="6650"data-precio2="6900" onclick="agregarProducto(this)">CHIA X 200 G</button>
+<button class="producto" data-nombre="AJONJOLI X 100 G" data-precio1="3300" data-precio2="3500"onclick="agregarProducto(this)">AJONJOLI X 100 G</button>
+<button class="producto" data-nombre="GRAGEAS X 100 G" data-precio1="2500"data-precio2="2650" onclick="agregarProducto(this)">GRAGEAS X 100 G</button>
+<button class="producto" data-nombre="HABA X 30 G" data-precio1="1150" data-precio2="1250"onclick="agregarProducto(this)">HABA X 30 G</button>
+<button class="producto" data-nombre="HABA X 60 G" data-precio1="2150" data-precio2="2250"onclick="agregarProducto(this)">HABA X 60 G</button>
+<button class="producto" data-nombre="HABA X 120 G" data-precio1="4150"data-precio2="4250" onclick="agregarProducto(this)">HABA X 120 G</button>
+<button class="producto" data-nombre="MANI UVA X 40 G" data-precio1="1150" data-precio2="1250"onclick="agregarProducto(this)">MANI UVA X 40 G</button>
+<button class="producto" data-nombre="MANI UVA X 80 G" data-precio1="2150" data-precio2="2250"onclick="agregarProducto(this)">MANI UVA X 80 G</button>
+<button class="producto" data-nombre="MANI UVA X 200 G" data-precio1="4150" data-precio2="4250"onclick="agregarProducto(this)">MANI UVA X 200 G</button>
+<button class="producto" data-nombre="MANI SALADO X 40 G" data-precio1="1150" data-precio2="1250"onclick="agregarProducto(this)">MANI SALADO X 40 G</button>
+<button class="producto" data-nombre="MANI SALADO X 80 G" data-precio1="2150" data-precio2="2250"onclick="agregarProducto(this)">MANI SALADO X 80 G</button>
+<button class="producto" data-nombre="MANI SALADO X 200 G" data-precio1="4150" data-precio2="4250"onclick="agregarProducto(this)">MANI SALADO X 200 G</button>
+<button class="producto" data-nombre="MANI DULCE X 40 G" data-precio1="1150"data-precio2="1250" onclick="agregarProducto(this)">MANI DULCE X 40 G</button>
+<button class="producto" data-nombre="MANI DULCE X 80 G" data-precio1="2150" data-precio2="2250"onclick="agregarProducto(this)">MANI DULCE X 80 G</button>
+<button class="producto" data-nombre="MANI DULCE X 200 G" data-precio1="4150" data-precio2="4250"onclick="agregarProducto(this)">MANI DULCE X 200 G</button>
+<button class="producto" data-nombre="MANI AJONJOLI X 40 G" data-precio1="1150"data-precio2="1250" onclick="agregarProducto(this)">MANI AJONJOLI X 40 G</button>
+<button class="producto" data-nombre="MANI AJONJOLI X 80 G" data-precio1="2150"data-precio2="2250" onclick="agregarProducto(this)">MANI AJONJOLI X 80 G</button>
+<button class="producto" data-nombre="MANI AJONJOLI X 200 G" data-precio1="4150"data-precio2="4250" onclick="agregarProducto(this)">MANI AJONJOLI X 200 G</button>
+<button class="producto" data-nombre="MANI MIXTO X 40 G" data-precio1="1150" data-precio2="1250"onclick="agregarProducto(this)">MANI MIXTO X 40 G</button>
+<button class="producto" data-nombre="MANI MIXTO X 80 G" data-precio1="2150" data-precio2="2250"onclick="agregarProducto(this)">MANI MIXTO X 80 G</button>
+<button class="producto" data-nombre="MANI MIXTO X 200 G" data-precio1="4150" data-precio2="4250"onclick="agregarProducto(this)">MANI MIXTO X 200 G</button>
+<button class="producto" data-nombre="MANI NATURAL X 40 G" data-precio1="1150" data-precio2="1250"onclick="agregarProducto(this)">MANI NATURAL X 40 G</button>
+<button class="producto" data-nombre="MANI NATURAL X 80 G" data-precio1="2150"data-precio2="2250" onclick="agregarProducto(this)">MANI NATURAL X 80 G</button>
+<button class="producto" data-nombre="MANI PICANTE X 40 G" data-precio1="1150" data-precio2="1250"onclick="agregarProducto(this)">MANI PICANTE X 40 G</button>
+<button class="producto" data-nombre="MANI PICANTE X 80 G" data-precio1="2150"data-precio2="2250" onclick="agregarProducto(this)">MANI PICANTE X 80 G</button>
+<button class="producto" data-nombre="MANI ARANDANOS X 40 G" data-precio1="1150" data-precio2="1250"onclick="agregarProducto(this)">MANI ARANDANOS X 40 G</button>
+<button class="producto" data-nombre="MANI ARANDANOS X 80 G" data-precio1="2150" data-precio2="2250"onclick="agregarProducto(this)">MANI ARANDANOS X 80 G</button>
+<button class="producto" data-nombre="ARANDANO X 50 G" data-precio1="2500" data-precio2="2650"onclick="agregarProducto(this)">ARANDANO X 50 G</button>
+<button class="producto" data-nombre="ARANDANO X 100 G" data-precio1="4900" data-precio2="5000"onclick="agregarProducto(this)">ARANDANO X 100 G</button>
+<button class="producto" data-nombre="PISTACHO X 35 G" data-precio1="4000" data-precio2="4150"onclick="agregarProducto(this)">PISTACHO X 35 G</button>
+<button class="producto" data-nombre="MIX FRUTOS SECOS X 50 G" data-precio1="4000"data-precio2="4150" onclick="agregarProducto(this)">MIX FRUTOS SECOS X 50 G</button>
+<button class="producto" data-nombre="MIX FRUTOS SECOS X 100 G" data-precio1="7900" data-precio2="8000"onclick="agregarProducto(this)">MIX FRUTOS SECOS X 100 G</button>
+<button class="producto" data-nombre="NUEZ X 50 G" data-precio1="4000" data-precio2="4150"onclick="agregarProducto(this)">NUEZ X 50 G</button>
+<button class="producto" data-nombre="NUEZ X 100 G" data-precio1="7900" data-precio2="8000"onclick="agregarProducto(this)">NUEZ X 100 G</button>
+<button class="producto" data-nombre="ALMENDRA X 50 G" data-precio1="4000" data-precio2="4150"onclick="agregarProducto(this)">ALMENDRA X 50 G</button>
+<button class="producto" data-nombre="ALMENDRA X 100 G" data-precio1="7900" data-precio2="8000"onclick="agregarProducto(this)">ALMENDRA X 100 G</button>
+<button class="producto" data-nombre="MORITAS X 50 G" data-precio1="1750"data-precio2="1900" onclick="agregarProducto(this)">MORITAS X 50 G</button>
+<button class="producto" data-nombre="MORITAS X 100 G" data-precio1="3400"data-precio2= "3650" onclick="agregarProducto(this)">MORITAS X 100 G</button>
+<button class="producto" data-nombre="GOMAS X 50 G" data-precio1="1750"data-precio2="1900" onclick="agregarProducto(this)">GOMAS X 50 G</button>
+<button class="producto" data-nombre="GOMAS X 100 G" data-precio1="3400"data-precio2="3650" onclick="agregarProducto(this)">GOMAS X 100 G</button>
+<button class="producto" data-nombre="ALMENDRA CONF X 50 G" data-precio1="2500"data-precio2="2650" onclick="agregarProducto(this)">ALMENDRA CONF X 50 G</button>
+<button class="producto" data-nombre="ALMENDRA CONF X 100 G" data-precio1="4900" data-precio2="5000"onclick="agregarProducto(this)">ALMENDRA CONF X 100 G</button>
+
+>>>>>>> fcc4c73 (Subiendo archivos del sistema de facturación)
 </div>
 </section>
 

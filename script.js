@@ -13,8 +13,55 @@ const db = firebase.firestore();
 
 let productosSeleccionados = [];
 
-// 🛒 Agregar producto
-function agregarProducto(nombre, precioUnitario) {
+function agregarProducto(elemento) {
+  const nombre = elemento.dataset.nombre;
+  const precioUnitario = parseFloat(
+    elemento.dataset.precio1 || elemento.dataset.precio || 0
+  );
+
+  const cantidad = prompt(`¿Cuántas unidades de ${nombre} deseas agregar?`);
+  const cantidadNum = parseInt(cantidad);
+
+  if (isNaN(cantidadNum) || cantidadNum <= 0) {
+    alert("Cantidad inválida.");
+    return;
+  }
+
+  productosSeleccionados.push({
+    nombre,
+    cantidad: cantidadNum,
+    precioUnitario,
+    total: cantidadNum * precioUnitario
+  });
+
+  actualizarListaVisual();
+}
+// 🔄 Control de lista de precios
+let listaPreciosActiva = 1; // por defecto usamos la lista 1
+
+document.getElementById("cambiarPrecios").addEventListener("click", () => {
+if (listaPreciosActiva === 1) {
+    listaPreciosActiva = 2;
+    alert("✅ Cambiaste a la lista VIAJERA");
+  } else {
+    listaPreciosActiva = 1;
+    alert("✅ Cambiaste a la lista NORMAL");
+  }
+});
+
+
+// 🛒 Agregar producto con soporte para dos listas
+function agregarProducto(elemento) {
+  const nombre = elemento.dataset.nombre;
+
+  // Si el producto tiene dos precios, usamos el que esté activo
+  let precioUnitario;
+  if (listaPreciosActiva === 1) {
+    precioUnitario = parseFloat(elemento.dataset.precio1 || elemento.dataset.precio);
+  } else {
+    precioUnitario = parseFloat(elemento.dataset.precio2 || elemento.dataset.precio);
+  }
+
   const cantidad = prompt(`¿Cuántas unidades de ${nombre} deseas agregar?`);
   const cantidadNum = parseInt(cantidad);
 
